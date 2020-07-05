@@ -71,7 +71,7 @@ export async function increaseBid(order: IEditOrder): Promise<OrderResponse> {
   }
 }
 
-async function getOrder(order: IGetOrder): Promise<OrderResponse> {
+export async function getOrder(order: IGetOrder): Promise<OrderResponse> {
   try {
     const response = await callApi.get(`/order/${order.uuid}`, {
       headers: {
@@ -100,7 +100,7 @@ async function getOrder(order: IGetOrder): Promise<OrderResponse> {
   }
 }
 
-async function deleteOrder(order: IGetOrder): Promise<OrderResponse> {
+export async function deleteOrder(order: IGetOrder): Promise<OrderResponse> {
   try {
     const response = await callApi.delete(`/order/${order.uuid}`, {
       headers: {

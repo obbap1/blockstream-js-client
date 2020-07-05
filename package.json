@@ -5,8 +5,15 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc"
+    "test": "jest --config jestconfig.json",
+    "build": "rm -r dist && tsc",
+    "prepare": "npm run build",
+    "lint": "tslint -p tsconfig.json",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "postversion": "git push && git push --tags",
+    "version": "npm run format && git add -A src"
   },
   "author": "",
   "license": "ISC",
@@ -15,8 +22,11 @@
     "axios": "^0.19.2"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.3",
     "eslint": "^7.2.0",
+    "jest": "^26.1.0",
     "prettier": "^2.0.5",
+    "ts-jest": "^26.1.1",
     "typescript": "^3.9.5"
   }
 }
