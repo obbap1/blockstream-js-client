@@ -1,5 +1,7 @@
 # Blockstream JS Client 🙂
 
+<img src="blockstream.jpg"/>
+
 ## Overview
 
 Find the Documentation for the Blockstream Satellite API [here](https://blockstream.com/satellite/)
