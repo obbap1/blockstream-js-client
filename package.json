@@ -4,8 +4,17 @@
   "description": "The implementation of the Blockstream Satellite API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "homepage": "https://github.com/obbap1/blockstream-js-client",
+  "keywords": [
+    "blockchain",
+    "blockstream"
+  ],
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/obbap1/blockstream-js-client"
+  },
   "scripts": {
-    "test": "jest --config jestconfig.json",
+    "test": "jest --passWithNoTests",
     "build": "rm -r dist && tsc",
     "prepare": "npm run build",
     "lint": "tslint -p tsconfig.json",
@@ -15,7 +24,7 @@
     "postversion": "git push && git push --tags",
     "version": "npm run format && git add -A src"
   },
-  "author": "",
+  "author": "Obba Paschal",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^14.0.13",
@@ -27,6 +36,7 @@
     "jest": "^26.1.0",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "tslint": "^6.1.2"
   }
 }
