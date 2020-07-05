@@ -1,6 +1,6 @@
 # Blockstream JS Client 🙂
 
-<img src="blockstream.jpg"/>
+<img src="https://res.cloudinary.com/pbaba/image/upload/v1593984649/blockstream_ewcziw.jpg"/>
 
 ## Overview
 

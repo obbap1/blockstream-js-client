@@ -1,13 +1,15 @@
 {
   "name": "blockstream-js-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The implementation of the Blockstream Satellite API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "homepage": "https://github.com/obbap1/blockstream-js-client",
   "keywords": [
     "blockchain",
-    "blockstream"
+    "blockstream",
+    "bitcoin",
+    "crypto"
   ],
   "repository": {
     "type": "git",
