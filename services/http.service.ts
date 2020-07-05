@@ -7,4 +7,5 @@ export const callApi = axios.default.create({
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
   },
+  timeout: 45000,
 });

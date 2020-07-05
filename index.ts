@@ -79,20 +79,17 @@ async function getOrder(order: IGetOrder): Promise<OrderResponse> {
       },
     });
 
-    console.log({ response });
-
     return {
       error: false,
-      auth_token: response.data?.auth_token,
-      uuid: response.data?.uuid,
-      lightning_invoice_id: response.data?.lightning_invoice?.id,
-      description: response.data?.lightning_invoice?.description,
-      status: response.data?.lightning_invoice?.status,
-      msatoshi: response.data?.lightning_invoice?.msatoshi,
-      payreq: response.data?.lightning_invoice?.payreq,
-      expires_at: response.data?.lightning_invoice?.expires_at,
-      created_at: response.data?.lightning_invoice?.created_at,
-      metadata: { ...response.data?.lightning_invoice?.metadata },
+      bid: response.data.bid,
+      message_digest: response.data.message_digest,
+      status: response.data.status,
+      uuid: response.data.uuid,
+      created_at: response.data.created_at,
+      started_transmission_at: response.data.started_transmission_at,
+      ended_transmission_at: response.data.ended_transmission_at,
+      tx_seq_num: response.data.tx_seq_num,
+      unpaid_bid: response.data.unpaid_bid,
     };
   } catch (error) {
     return {
@@ -111,10 +108,9 @@ async function deleteOrder(order: IGetOrder): Promise<OrderResponse> {
       },
     });
 
-    console.log({ response });
     return {
       error: false,
-      message: `Order ${order.uuid} has been deleted successfully!`,
+      message: response.data.message_digest,
     };
   } catch (error) {
     return {
@@ -146,13 +142,11 @@ export async function getOrders(order: IQueryOrder): Promise<OrderResponse> {
           })
         : '';
 
-    const response = await callApi.get(`/order/${order.state}/${query}`);
-
-    console.log({ response });
+    const response = await callApi.get(`/orders/${order.state}?${query}`);
 
     return {
       error: false,
-      message: 'Yup',
+      data: response.data,
     };
   } catch (error) {
     return {
@@ -166,11 +160,20 @@ export async function getOrders(order: IQueryOrder): Promise<OrderResponse> {
 export async function getInfo(): Promise<OrderResponse> {
   try {
     const response = await callApi.get('/info');
-    console.log({ response });
+
     return {
       error: false,
       id: response.data?.id,
-      port: response.data?.port,
+      alias: response.data.alias,
+      color: response.data.color,
+      number_of_peers: response.data.num_peers,
+      number_of_active_channels: response.data.num_active_channels,
+      number_of_inactive_channels: response.data.num_inactive_channels,
+      number_of_pending_channels: response.data.num_pending_channels,
+      binding: response.data.binding,
+      msatoshi_fees_collected: response.data.msatoshi_fees_collected,
+      fees_collected_msat: response.data.fees_collected_msat,
+      lightning_directory: response.data['lightning-dir'],
       address: response.data?.address,
       version: response.data?.version,
       blockheight: response.data?.blockheight,
@@ -187,4 +190,18 @@ export async function getInfo(): Promise<OrderResponse> {
 
 export async function subscribeToChannels(
   channels: Array<string>
-): Promise<any> {}
+): Promise<any> {
+  try {
+    const list = channels.join(',');
+
+    const results = (await callApi.get(`/subscribe/${list}`)) || [];
+
+    return results;
+  } catch (error) {
+    return {
+      error: true,
+      message:
+        error.message || error.response?.statusText || 'An Error occured!',
+    };
+  }
+}

@@ -17,6 +17,6 @@ export interface IGetOrder {
 
 export interface IQueryOrder {
   readonly state: string;
-  readonly limit?: Date;
-  readonly before?: Date;
+  readonly limit?: string | number;
+  readonly before?: Date | string;
 }
